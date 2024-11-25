@@ -6,11 +6,11 @@ import {createFilePath, readMessages} from "../generate/index.js";
 
 export async function translate(data = [],  {languages = ['en'], defaultLang, uid, output }) {
     const temp = {};
-    const isTranslated = checkTranslated.bind(null,{ uid, output });
-	for (let index = 0; index < languages.length; index++) {
-        const lang = languages[index];
-        temp[lang] = await translateData(data, {lang, isTranslated })
-    }
+    // const isTranslated = checkTranslated.bind(null,{ uid, output });
+	// for (let index = 0; index < languages.length; index++) {
+    //     const lang = languages[index];
+    //     temp[lang] = await translateData(data, {lang, isTranslated })
+    // }
     // 将默认语言也构建一下
     const defaultLangData = {};
    data.map(({ key, value}) => {
