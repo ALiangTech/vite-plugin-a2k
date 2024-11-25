@@ -1,0 +1,24 @@
+{
+  "name": "vite-plugin-gen-i18n-key",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@babel/generator": "^7.25.6",
+    "@babel/parser": "^7.25.6",
+    "@babel/traverse": "^7.25.6",
+    "@babel/types": "^7.25.6",
+    "chokidar": "^4.0.1",
+    "vue": "^3.4.37",
+    "vue-i18n": "9"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.1.2",
+    "vite": "5.4.6"
+  }
+}
