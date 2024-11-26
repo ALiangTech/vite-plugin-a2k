@@ -4,7 +4,7 @@ import path from 'node:path'
 
 export const currentWorkingDirectory = process.cwd();
 
-function writeFileSync(filePath, content = {}) {
+export function writeFileSync(filePath, content = {}) {
     try {
         createDir(filePath); // 如果文件夹不存在，则先创建文件夹
         fs.writeFileSync(filePath, JSON.stringify(content, null, 2));  // 格式化为 JSON 字符串
@@ -12,13 +12,6 @@ function writeFileSync(filePath, content = {}) {
         console.error(`写入文件 ${filePath} 失败`, err);
     }
 }
-
-export function initJSONFile({ output }) {
-   const { originDataFilePath, translateFilePath} = createFilePath(output)
-   writeFileSync(originDataFilePath)
-   writeFileSync(translateFilePath)
-}
-
 export function createFilePath(output = '') {
     if (!output) {
         output = '/src/locales/'
@@ -29,21 +22,6 @@ export function createFilePath(output = '') {
      return {commonFilePath, originDataFilePath, translateFilePath}
 }
 
-export function writeMessage (data = {}, {output}) { 
-    const {originDataFilePath, translateFilePath} = createFilePath(output)
-    let originData = readMessages(originDataFilePath);
-    originData = {...originData, ...data}
-    writeFileSync(originDataFilePath, originData) // 原始数据存放起来
-    let temp = {
-        cn: {},
-        en: {}
-    }
-    Object.values(originData).forEach(item => {
-       temp.cn = {...temp.cn, ...item.cn}
-       temp.en = {...temp.en, ...item.en}
-    })
-    writeFileSync(translateFilePath, temp) // 翻译文件
-}
 
 export function readMessages (path = '') {
    try {
@@ -68,4 +46,9 @@ export function createDir(filePath = "") {
   } catch (error) {
     throw new Error(`创建目录时发生错误: ${error.message}`);
   }
+}
+
+// 判断文件是否存在
+export function isFileExist(filePath = '') {
+  return fs.existsSync(filePath)
 }
