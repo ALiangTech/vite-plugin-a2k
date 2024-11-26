@@ -56,4 +56,12 @@ export function query({ lang })  {
 }
 
 
-// 翻译某一语言数据
+// 添加翻译
+export function addTranslate({ key, value, lang, }) {
+    try {
+        const stmt = db.prepare(`update languages set value = ?, isTranslated = 1 where key = ? and lang = ?;`)
+        return stmt.run(value, key, lang)?.changes === 1; // 插入成功返回true
+    } catch (e) {
+        console.error(`添加翻译失败 ${key} ${value} ${lang};原因是:${e.message}`)
+    }
+}

@@ -3,7 +3,9 @@ import {currentWorkingDirectory, isFileExist, writeFileSync, createDir} from './
 import {normalizePath} from 'vite'
 import { collectNeedTranslate } from './collect/index.js'
 
-import {initDB, inserts, query} from './sqlite/index.js'
+import {addTranslate, initDB, inserts, query} from './sqlite/index.js'
+import {autoTranslate} from "./baidu/index.js";
+import {tryStatement} from "@babel/types";
 
 const fileRegex = /\.(vue)$/
 
@@ -38,14 +40,33 @@ export default function myPlugin() {
       }
     },
     configureServer(server) {
-      server.middlewares.use((req, res, next) => {
+      server.middlewares.use(async(req, res, next) => {
         // 自定义请求处理...
         // 如果请求的是json 文件那我这个时候 去给他生成json 文件
         const result = req.url.match(/\/langs\/(.*?)\.json/);
         if (result) {
           const lang = result[1];
-          // 进行翻译
-          console.log(lang, 'lang')
+          if (lang !== config.languages[0]) { // 默认语言不需要翻译
+            // 进行翻译
+            const data = query({lang});
+            const temp = {}
+            for (const {key, value,  isTranslated } of data) {
+              if (isTranslated) {
+                temp[key] = value;
+                continue
+              } // 翻译过就不需要再次翻译 手动翻译吧 少年
+               try {
+                 const translatedContent = await autoTranslate(value, lang);
+                 temp[key] = translatedContent;
+                 addTranslate({key, value: translatedContent, lang })
+               } catch (e) {
+                 console.log(`翻译出现问题${e.message}`)
+               }
+            }
+            // 翻译结束 生成对应语言的json文件
+            const filePath = `${config.output}/langs/${lang}.json`
+            writeFileSync(filePath, temp);
+          }
         }
         next();
       })

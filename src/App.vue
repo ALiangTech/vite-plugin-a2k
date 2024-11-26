@@ -11,7 +11,8 @@ const test = () => {
 
 async function changeLocal(lang) {
   locale.value = lang
-  const messages = await import(`./locales/langs/${lang}.json`)
+  const messages = await import(`./locales/langs/${lang}.json`);
+  console.log('messages', messages)
   setLocaleMessage(lang, messages.default)
   console.log('messages', messages.default)
 }
