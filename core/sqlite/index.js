@@ -39,7 +39,7 @@ export function insert({ key, value, lang, path }) {
 export function inserts({ data = [],languages = [], path }) {
     languages.forEach((lang,index) => {
         for (const { key, value} of data) { // 每种语言都插入数据库
-           insert({ key, value: index === 0 ? value : `${value}${lang}`, lang, path}) // 只有默认语言不需要翻译
+           insert({ key, value, lang, path})
         }
     })
 }
@@ -65,3 +65,24 @@ export function addTranslate({ key, value, lang, }) {
         console.error(`添加翻译失败 ${key} ${value} ${lang};原因是:${e.message}`)
     }
 }
+
+
+// 查询key是否存在
+export function queryKey({ path, lang }) {
+    try {
+        const stmt = db.prepare(`select * from languages where path = ? and lang = ?;`)
+        const data = stmt.all(path, lang)
+        return (key) => {
+            return data.find(item => item.key === key)
+        }
+    } catch (e) {
+        throw new Error(`查询key失败 ${key} ${lang};原因是:${e.message}`)
+    }
+}
+
+
+
+
+
+
+

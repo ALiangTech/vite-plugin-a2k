@@ -3,10 +3,10 @@ import './style.css'
 import App from './App.vue'
 import { createI18n } from 'vue-i18n'
 import cnData from './locales/langs/cn.json'
-console.log(cnData, 'init')
+const locale = localStorage.getItem('lang')
 const i18n = createI18n({
     legacy: false,
-    locale: 'cn',
+    locale: locale,
     fallbackLocale: 'cn',
     messages: {
         cn: cnData,

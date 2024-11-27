@@ -7,7 +7,8 @@ export const currentWorkingDirectory = process.cwd();
 export function writeFileSync(filePath, content = {}) {
     try {
         createDir(filePath); // 如果文件夹不存在，则先创建文件夹
-        fs.writeFileSync(filePath, JSON.stringify(content, null, 2));  // 格式化为 JSON 字符串
+        const oldContent = readMessages(filePath)
+        fs.writeFileSync(filePath, JSON.stringify({...oldContent, ...content}, null, 2));  // 格式化为 JSON 字符串
     } catch (err) {
         console.error(`写入文件 ${filePath} 失败`, err);
     }
@@ -52,3 +53,4 @@ export function createDir(filePath = "") {
 export function isFileExist(filePath = '') {
   return fs.existsSync(filePath)
 }
+
