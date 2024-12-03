@@ -1,0 +1,11 @@
+{
+  "name": "@a2k/app",
+  "private": false,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  }
+}

@@ -1,25 +1,26 @@
 {
-  "name": "vite-plugin-gen-i18n-key",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "vite-plugin-a2k",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "echo '33'"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "@babel/generator": "^7.25.6",
-    "@babel/parser": "^7.25.6",
-    "@babel/traverse": "^7.25.6",
-    "@babel/types": "^7.25.6",
-    "better-sqlite3": "^11.5.0",
-    "chokidar": "^4.0.1",
-    "vue": "^3.4.37",
-    "vue-i18n": "9"
+    "@ant-design/icons-vue": "^7.0.1",
+    "ant-design-vue": "4.x",
+    "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.1.2",
-    "vite": "5.4.6"
+    "@types/node": "^22.10.1",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "better-sqlite3": "^11.6.0",
+    "typescript": "~5.6.2",
+    "unplugin-vue-components": "^0.27.5",
+    "vite": "^6.0.1",
+    "vue-tsc": "^2.1.10"
   }
 }

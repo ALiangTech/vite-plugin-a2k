@@ -36,6 +36,17 @@ pnpm add vite-plugin-gen-i18n-key -D
 ### 放弃自动翻译 做个半自动的翻译
 
 
+### vite 插件只做key的提取和中文转化
+### app ui界面用来翻译
+
+
+## 安装  better-sqlite3 遇到的问题
+```txt
+'node-gyp' is not recognized as an internal or external command,
+```
+通过安装 pnpm add -g node-gyp 解决
+
+
 
 
 
