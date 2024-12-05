@@ -1,8 +1,10 @@
 import type {Database} from 'better-sqlite3';
 import DB from 'better-sqlite3'
 import type {TranslateItem} from './collect';
+import {readFileSync, writeFileSync} from "./generateLangJson";
+import type {Config} from "./index";
 export let db:Database
-export function initDB() {
+export function initDB(config: Config,) {
     try {
         // @ts-ignore
         db = new DB(`./node_modules/@a2k/languages.db`);
@@ -17,6 +19,19 @@ export function initDB() {
           isTranslated INTEGER,
           UNIQUE(key, lang)
       );`);
+        const insert = db.prepare('INSERT OR REPLACE INTO languages VALUES (@id, @key, @value, @lang, @path, @isTranslated)');
+        const insertMany = db.transaction((data) => {
+            for (let i = 0; i < data.length; i++) {
+                const item = data[i]
+                item['id'] = i+ 1;
+                insert.run(item);
+            }
+        });
+        // 读取备份文件
+        const backupData = readFileSync(config.backup)
+        if(Array.isArray(backupData)) {
+            insertMany(backupData)
+        }
     }catch (e) {
         // @ts-ignore
         console.error("初始化数据库失败:", e.message)
@@ -72,5 +87,18 @@ export function updateValue(key: string, lang: string, value: string) {
         console.log(`更新key:${key} 成功`)
     } catch (e:any) {
         throw new Error(`更新key:${key} 失败:${e.message}`)
+    }
+}
+
+// 导出数据库全部数据 存放到backup.json
+export function exportAll(filePath:string) {
+    try {
+        if(!filePath) {
+            console.log(`备份文件路径不能为空`)
+        }
+        const result = db.prepare(`select * from languages`).all();
+        writeFileSync(filePath, result)
+    } catch (e:any) {
+        console.error(`导出数据库全部数据失败:${e.message}`)
     }
 }

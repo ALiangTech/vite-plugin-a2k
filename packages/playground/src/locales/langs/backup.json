@@ -1,0 +1,98 @@
+{
+  "0": {
+    "id": 1,
+    "key": "kKNOSFkn",
+    "value": "那么大",
+    "lang": "cn",
+    "path": "/src/App.vue",
+    "isTranslated": null
+  },
+  "1": {
+    "id": 2,
+    "key": "T2BZfQ",
+    "value": "你好",
+    "lang": "cn",
+    "path": "/src/App.vue",
+    "isTranslated": null
+  },
+  "2": {
+    "id": 3,
+    "key": "T2Bg81O7dws",
+    "value": "你想去看",
+    "lang": "cn",
+    "path": "/src/App.vue",
+    "isTranslated": null
+  },
+  "3": {
+    "id": 4,
+    "key": "ThZ1TJCjTkhZJ2IRYPNTu3cLdws",
+    "value": "世界那么大我想去看看",
+    "lang": "cn",
+    "path": "/src/App.vue",
+    "isTranslated": null
+  },
+  "4": {
+    "id": 5,
+    "key": "YhFmL04ATiqAAVueTro",
+    "value": "我是一个老实人",
+    "lang": "cn",
+    "path": "/src/App.vue",
+    "isTranslated": null
+  },
+  "5": {
+    "id": 6,
+    "key": "kKNOSFkn",
+    "value": "那么大",
+    "lang": "en",
+    "path": "/src/App.vue",
+    "isTranslated": null
+  },
+  "6": {
+    "id": 7,
+    "key": "T2BZfQ",
+    "value": "你好",
+    "lang": "en",
+    "path": "/src/App.vue",
+    "isTranslated": null
+  },
+  "7": {
+    "id": 8,
+    "key": "T2Bg81O7dws",
+    "value": "你想去看",
+    "lang": "en",
+    "path": "/src/App.vue",
+    "isTranslated": null
+  },
+  "8": {
+    "id": 9,
+    "key": "ThZ1TJCjTkhZJ2IRYPNTu3cLdws",
+    "value": "世界那么大我想去看看",
+    "lang": "en",
+    "path": "/src/App.vue",
+    "isTranslated": null
+  },
+  "9": {
+    "id": 10,
+    "key": "YhFmL04ATiqAAVueTro",
+    "value": "我是一个老实人",
+    "lang": "en",
+    "path": "/src/App.vue",
+    "isTranslated": null
+  },
+  "10": {
+    "id": 11,
+    "key": "YktnOg",
+    "value": "手机",
+    "lang": "cn",
+    "path": "/src/test.ts",
+    "isTranslated": null
+  },
+  "11": {
+    "id": 12,
+    "key": "YktnOg",
+    "value": "手机",
+    "lang": "en",
+    "path": "/src/test.ts",
+    "isTranslated": null
+  }
+}

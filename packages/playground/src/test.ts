@@ -1,0 +1,1 @@
+export const files = `[[手机]]`

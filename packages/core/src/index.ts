@@ -1,23 +1,25 @@
 import {type Plugin, normalizePath } from 'vite'
 import {collectNeedTranslate, type TranslateItem} from "./collect";
-import {initDB, inserts} from "./sqllite";
+import {exportAll, initDB, inserts} from "./sqllite";
 import {writeFileSync} from "./generateLangJson";
 import startApp from './server'
 
 
 
 export default function a2k(options: OptionalConfig = {}): Plugin {
-    const fileRegex = /\.(vue)$/;
+    const fileRegex = /\.(vue|js|mjs|jsx|ts|mts|tsx)$/;
     const currentWorkingDirectory = process.cwd();
     const config:Config = Object.assign({
         "output": '/src/locales',
+        backup: '',
         "languages": ['cn', 'en'], // 数组第一个就是默认系统默认语言
     }, options);
     return {
         name: 'a2k',
         buildStart(){
             config.output = `${currentWorkingDirectory}${config.output}`
-            initDB()
+            config.backup = `${config.output}/langs/backup.json`; // 备份json存放地址
+            initDB(config)
             startApp(config);
         },
         transform(src, id) {
@@ -28,6 +30,7 @@ export default function a2k(options: OptionalConfig = {}): Plugin {
                 if(needTranslate.length) {
                     inserts({data:needTranslate, languages: config.languages, path }) // 收集的数据插入本地数据库中
                     // 生成默认的语言json文件
+                    exportAll(config.backup)
                     generateDefaultLang(config, needTranslate)
                 }
                 return  {
@@ -37,12 +40,16 @@ export default function a2k(options: OptionalConfig = {}): Plugin {
             return {
                 code: src,
             }
-        }
+        },
+        watchChange(id, change) {
+            // 监听db的变化生成语言文件
+        },
     }
 }
 
 export interface Config {
     output: string
+    backup: string
     languages: string[]
 }
 

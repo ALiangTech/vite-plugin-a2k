@@ -3,10 +3,6 @@ import path from "node:path";
 import * as fs from "node:fs";
 
 
-
-
-
-
 // 如果文件路径不存在 则创建文件夹
 export function createDir(filePath = "") {
     try {
